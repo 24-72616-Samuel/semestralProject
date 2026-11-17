@@ -1,0 +1,182 @@
+/* =====================================================================
+   LEDGER LAYOUT: one consistent look for every page inside the app
+   (serif page title + subtitle, KPI cards, pill tabs, ledger tables,
+   status chips, outlined action buttons). Loaded after style.css.
+   Change the three --ld-* colours below to re-theme everything.
+   ===================================================================== */
+body.has-sidebar {
+  --ld-bg: #f4f1ea;          /* warm page background */
+  --ld-card: #fbfaf6;        /* card surface */
+  --ld-head: #e9e3d6;        /* table header band */
+  --ld-line: #e3ddd0;
+  --ld-ink: #1f2a24;
+  --ld-soft: #6f7770;
+  --ld-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --ld-accent: var(--red);
+}
+body.has-sidebar, body.has-sidebar .app-main { background: var(--ld-bg); }
+body.has-sidebar main.container { max-width: 1360px; padding-top: 8px; }
+
+/* ---- Top bar (bell + user chip) ---- */
+.app-topbar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; padding: 14px 0 14px; margin: 0 32px 10px; border-bottom: 1px solid var(--ld-line); }
+.topbar-info { display: flex; align-items: center; gap: 8px 20px; margin-right: auto; min-width: 0; overflow: hidden; color: var(--ld-soft); font-size: .8rem; white-space: nowrap; }
+.topbar-info span { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.topbar-info span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.topbar-info .ico { width: 14px; height: 14px; margin: 0; flex: none; color: var(--ld-accent); }
+@media (max-width: 1399px) { .topbar-info span:first-child { display: none; } }
+@media (max-width: 1199px) { .topbar-info span:nth-child(3) { display: none; } }
+.topbar-bell { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border: 1px solid var(--ld-line); border-radius: 10px; background: var(--ld-card); color: var(--ld-ink); text-decoration: none; }
+.topbar-bell .ico { width: 18px; height: 18px; margin: 0; }
+.topbar-bell:hover { background: #fff; color: var(--ld-ink); }
+.topbar-count { background: #f2b84b; color: #3b2a00; font-size: .72rem; font-weight: 700; line-height: 1; padding: 4px 7px; border-radius: 6px; }
+.topbar-user { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--ld-line); border-radius: 10px; background: var(--ld-card); color: var(--ld-ink); font-weight: 500; font-size: .95rem; }
+.topbar-user .ico { width: 18px; height: 18px; margin: 0; }
+@media (max-width: 991px) { .app-topbar { display: none; } }
+
+/* ---- Page header ---- */
+.page-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin: 6px 0 22px; }
+.page-head-text { min-width: 0; }
+body.has-sidebar main h1:not(.hero-title), body.has-sidebar main h1.h2, .queue-page h1 {
+  font-family: var(--ld-serif); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.2rem); letter-spacing: 0; line-height: 1.15;
+  color: var(--ld-ink); text-transform: none; margin: 0;
+}
+.page-sub { margin: 6px 0 0; color: var(--ld-soft); font-size: .92rem; max-width: 760px; }
+.page-sub a { color: var(--ld-accent); }
+.page-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.q-sub { color: var(--ld-soft); }
+
+/* Section headings: quiet serif, no side bar */
+body.has-sidebar main h2, body.has-sidebar main h2.h4, body.has-sidebar main h2.h5, .q-title {
+  font-family: var(--ld-serif); font-weight: 400; font-size: 1.35rem; color: var(--ld-ink); letter-spacing: 0; margin: 2rem 0 .8rem;
+}
+body.has-sidebar main h2::before, .q-title::before { display: none; }
+body.has-sidebar main h3 { font-family: var(--ld-serif); font-weight: 400; font-size: 1.25rem; color: var(--ld-ink); }
+
+/* ---- Cards ---- */
+body.has-sidebar .card { background: var(--ld-card); border: 1px solid var(--ld-line); border-radius: 14px; box-shadow: none !important; }
+
+/* ---- KPI cards (the existing .stats / .stat markup) ---- */
+.stats { gap: 16px; margin: 0 0 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.stat.card, body.has-sidebar .stat.card { border: 1px solid var(--ld-line); border-left: 1px solid var(--ld-line); border-radius: 14px; background: var(--ld-card); }
+.stat.card .card-body { padding: 20px 24px 22px; display: flex; flex-direction: column-reverse; gap: 8px; }
+.stat small { color: var(--ld-soft); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
+.stat span { font-family: var(--ld-serif); font-weight: 400; font-size: 2rem; line-height: 1.1; color: var(--ld-ink); }
+a.stat.card:hover { background: #fff; }
+
+/* ---- Pill tabs: filters, payroll tabs ---- */
+.ledger-tabs, .nav-pills { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; margin: 0 0 18px; background: #f9f7f1; border: 1px solid var(--ld-line); border-radius: 14px; list-style: none; }
+.ledger-tabs a, .nav-pills .nav-link {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid var(--ld-line); border-radius: 8px;
+  background: var(--ld-card); color: var(--ld-ink); font-size: .88rem; font-weight: 500; text-decoration: none;
+}
+.ledger-tabs a:hover, .nav-pills .nav-link:hover { background: #fff; color: var(--ld-ink); }
+.ledger-tabs a.active, .nav-pills .nav-link.active, .nav-pills .show > .nav-link { background: var(--ld-ink); border-color: var(--ld-ink); color: #fff; font-weight: 600; }
+.ledger-tabs .tab-count { font-size: .72rem; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #f2b84b; color: #3b2a00; }
+.ledger-tabs a.active .tab-count { background: rgba(255,255,255,.22); color: #fff; }
+.nav-pills .nav-item { margin: 0; }
+
+/* ---- Ledger tables ---- */
+.table-responsive.card { border-radius: 14px; }
+.table { --bs-table-bg: transparent; --bs-table-hover-bg: #f6f3ea; color: var(--ld-ink); }
+.table thead th {
+  background: var(--ld-head); color: #4a554d; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em;
+  padding: 1rem 1.25rem; border-bottom: 1px solid var(--ld-line) !important; white-space: nowrap;
+}
+.table > :not(caption) > * > * { padding: 1.05rem 1.25rem; border-bottom-color: var(--ld-line); }
+.table tbody td { color: var(--ld-ink); font-size: .92rem; }
+.table tbody td small, .table tbody td .text-muted { color: var(--ld-soft) !important; }
+.table .table-light, .table .table-light > * { --bs-table-bg: #f1ede2; background: #f1ede2; }
+.table td:first-child { font-weight: 500; }
+.table td.actions { min-width: 200px; }
+.table-responsive.card > .table { min-width: 720px; }
+
+/* ---- Status pills and chips (Verified / Real Remittance / Demo Mode look) ---- */
+.pill { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: .74rem; font-weight: 700; letter-spacing: .02em; text-transform: capitalize; background: #ece7da; color: #4a554d; }
+.pill.completed, .pill.verified, .pill.paid { background: #2f6b4a; color: #fff; }
+.pill.confirmed { background: #dfeaf5; color: #1f4e79; }
+.pill.pending { background: #fbe8b5; color: #6a4b00; }
+.pill.in_progress { background: #f6dde5; color: #5a0f26; }
+.pill.cancelled { background: #ece7da; color: #6f7770; }
+.badge { font-weight: 600; letter-spacing: .01em; border-radius: 6px; }
+.badge.bg-secondary { background: #dfeaf5 !important; color: #1f4e79; }
+.badge.bg-warning { background: #fbe8b5 !important; color: #6a4b00 !important; }
+.badge.bg-info { background: #dfeaf5 !important; color: #1f4e79 !important; }
+
+/* ---- Buttons: neutral outlined actions, solid for the main one ---- */
+body.has-sidebar .btn { border-radius: 8px; font-weight: 500; }
+body.has-sidebar .btn-outline-primary, body.has-sidebar .btn-outline-secondary {
+  background: var(--ld-card); border: 1px solid #cfc8b8; color: var(--ld-ink);
+}
+body.has-sidebar .btn-outline-primary:hover, body.has-sidebar .btn-outline-primary:focus,
+body.has-sidebar .btn-outline-secondary:hover { background: #fff; border-color: var(--ld-ink); color: var(--ld-ink); }
+body.has-sidebar .btn-outline-danger { background: var(--ld-card); border-color: #e3b8c3; color: #9b1c3d; }
+body.has-sidebar .btn-outline-danger:hover { background: #9b1c3d; border-color: #9b1c3d; color: #fff; }
+body.has-sidebar .btn-primary { background: var(--ld-ink); border-color: var(--ld-ink); color: #fff; }
+body.has-sidebar .btn-primary:hover, body.has-sidebar .btn-primary:focus { background: #000; border-color: #000; }
+body.has-sidebar .btn-danger { background: #9b1c3d; border-color: #9b1c3d; }
+.btn .ico { width: 15px; height: 15px; margin: 0 6px 0 0; vertical-align: -2px; }
+
+/* ---- Forms ---- */
+body.has-sidebar .form-control, body.has-sidebar .form-select { background-color: #fff; border-color: #d9d2c2; border-radius: 8px; }
+body.has-sidebar .form-control:focus, body.has-sidebar .form-select:focus { border-color: var(--ld-ink); box-shadow: 0 0 0 .2rem rgba(31,42,36,.12); }
+.inline-form { padding: 12px 14px; background: #f9f7f1; border: 1px solid var(--ld-line); border-radius: 14px; margin: 0 0 18px; }
+.alert { border-radius: 12px; }
+body.has-sidebar .alert-info { background: #eef3f8; border-color: #d2e0ee; color: #1f4e79; }
+body.has-sidebar .alert-warning { background: #fdf3d6; border-color: #f3dc9b; color: #6a4b00; }
+
+/* ---- Bays, queue, reviews, chat: same surfaces ---- */
+.bay.card, .bay.free, .bay.busy { background: var(--ld-card); }
+.bay.busy { background: #fbf1f3; }
+.q-bay { background: var(--ld-card); border-color: var(--ld-line); }
+.q-bay.busy { background: #fbf1f3; }
+.chat-log { background: #f4f1ea; }
+.chat-item:hover, .chat-item.active { background: #f1ede2; }
+.chat-head, .chat-new, .chat-form, .chat-item { border-color: var(--ld-line); }
+.progress { background: #e9e3d6; }
+.progress-bar { background: var(--ld-ink); }
+.dist-bar { background: #e9e3d6; }
+.rating-big { font-family: var(--ld-serif); font-weight: 400; color: var(--ld-ink); }
+
+@media (max-width: 575px) {
+  .page-head { align-items: flex-start; }
+  .app-topbar { margin-left: 16px; margin-right: 16px; }
+}
+
+/* ---- Live queue summary: same KPI look as the other pages ---- */
+.q-summary { background: var(--ld-card); color: var(--ld-ink); border: 1px solid var(--ld-line); border-radius: 14px; }
+.q-metric { border-right: 1px solid var(--ld-line); }
+.q-metric-ico { background: var(--ld-head); color: #4a554d; }
+.q-metric b { font-family: var(--ld-serif); font-weight: 400; font-size: 2rem; color: var(--ld-ink); }
+.q-metric b em, .q-metric small, .q-occ-label { color: var(--ld-soft); }
+.q-occ-label strong { color: var(--ld-ink); }
+.q-occupancy { background: #f1ede2; }
+.q-occupancy .progress { background: #ddd6c6; }
+.q-live { background: var(--ld-card); border-color: var(--ld-line); }
+@media (max-width: 767px) { .q-metric { border-bottom: 1px solid var(--ld-line); } }
+
+
+/* ---- Open / closed pill + shop info in the sidebar (phones and tablets) ---- */
+.open-pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .02em; }
+.open-pill.is-open { background: #2f6b4a; color: #fff; }
+.open-pill.is-closed { background: #ece7da; color: #6f7770; }
+.topbar-info .open-pill { margin-left: 2px; }
+.sidebar-shopinfo { display: none; padding: 12px 16px; border-top: 1px solid #6a1735; color: #e9c9d3; font-size: .78rem; line-height: 1.7; }
+.sidebar-shopinfo .ico { width: 13px; height: 13px; margin: 0 6px 0 0; vertical-align: -2px; }
+.sidebar-shopinfo .open-pill { margin-bottom: 4px; }
+@media (max-width: 991px) { .sidebar-shopinfo { display: block; } }
+
+/* ---- Dashboard extras ---- */
+.stat-trend { font-size: .74rem; font-weight: 600; margin-top: 2px; color: var(--ld-soft); }
+.stat-trend.up { color: #2f6b4a; } .stat-trend.down { color: #9b1c3d; }
+.next-up { list-style: none; margin: 0; padding: 0; }
+.next-up li { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--ld-line); }
+.next-up li:last-child { border-bottom: 0; }
+.next-up .nu-time { min-width: 74px; font-family: var(--ld-serif); font-size: 1.15rem; color: var(--ld-ink); }
+.next-up .nu-main { flex: 1; min-width: 0; font-weight: 500; }
+.next-up .nu-main small { display: block; color: var(--ld-soft); font-weight: 400; }
+.empty-state { text-align: center; padding: 22px 12px; color: var(--ld-soft); }
+.empty-state strong { display: block; color: var(--ld-ink); font-family: var(--ld-serif); font-weight: 400; font-size: 1.15rem; margin-bottom: 4px; }
+.bay-timer { display: inline-block; margin-top: 6px; font-size: .78rem; font-weight: 700; color: #9b1c3d; }
+.promo-banner { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; margin: 0 0 18px; background: #fdf3d6; border: 1px solid #f3dc9b; border-radius: 14px; color: #6a4b00; }
+.promo-banner b { font-family: var(--ld-serif); font-weight: 400; font-size: 1.25rem; }
+.promo-banner .btn { margin-left: auto; }
